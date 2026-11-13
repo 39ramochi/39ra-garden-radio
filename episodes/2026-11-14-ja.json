@@ -1,0 +1,458 @@
+{
+  "format": "monoradio/news-1",
+  "date": "2026-11-14",
+  "lang": "ja",
+  "seconds": 188.003,
+  "title": "EP002｜AIの進化と25年のゲーム史、年末のサイバー演歌",
+  "audio": "audio/2026-11-14-ja.mp3",
+  "made_at": "2026-11-14T04:10:53+09:00",
+  "opening": [
+    {
+      "say": "みなさん、こんばんは。",
+      "show": "みなさん、こんばんは。"
+    },
+    {
+      "say": "39ra Garden Radio、ナイト・ガーデン・ブロードキャストへようこそ。",
+      "show": "39ra Garden Radio、ナイト・ガーデン・ブロードキャストへようこそ。"
+    },
+    {
+      "say": "今夜は、Googleの新しいAI、SteamOSの更新、Xboxの25周年、そしてAI音楽の年末企画をお届けします。",
+      "show": "今夜は、Googleの新しいAI、SteamOSの更新、Xboxの25周年、そしてAI音楽の年末企画をお届けします。"
+    },
+    {
+      "say": "それでは今夜も、少しの好奇心とともに始めましょう。",
+      "show": "それでは今夜も、少しの好奇心とともに始めましょう。"
+    }
+  ],
+  "news": [
+    {
+      "label": "Google Gemini 4 Hydrogen",
+      "points": [
+        "Googleが11月12日に発表",
+        "プログラミング・エージェント作業の速度と効率",
+        "Google AI Studio・Geminiアプリ・検索などへ展開"
+      ],
+      "details": [
+        "Googleが11月12日に発表",
+        "プログラミング・エージェント作業の速度と効率",
+        "Google AI Studio・Geminiアプリ・検索などへ展開"
+      ],
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-Hydrogen/",
+      "link": {
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-Hydrogen/",
+        "title": "Introducing Gemini 4 Hydrogen",
+        "site": "Google",
+        "description": "新しいAIモデルの公式発表",
+        "image": "assets/news/ep002/ep002_01_ai_google-gemini4hydrogen.webp"
+      },
+      "lines": [
+        {
+          "say": "最初はAIの話題です。",
+          "show": "最初はAIの話題です。"
+        },
+        {
+          "say": "Googleが11月12日、新しいAIモデル、Gemini 4 Hydrogenを発表しました。",
+          "show": "Googleが11月12日、新しいAIモデル、Gemini 4 Hydrogenを発表しました。"
+        },
+        {
+          "say": "プログラミングや、複数の仕事を順に進めるAIエージェントで、速さと効率の両立を目指したモデルです。",
+          "show": "プログラミングや、複数の仕事を順に進めるAIエージェントで、速さと効率の両立を目指したモデルです。"
+        },
+        {
+          "say": "Google AI StudioやGeminiアプリ、Google検索などへの展開も案内されています。",
+          "show": "Google AI StudioやGeminiアプリ、Google検索などへの展開も案内されています。"
+        },
+        {
+          "say": "頭の良さだけでなく、手際の良さも、AI選びの大切な基準になりそうですね。",
+          "show": "頭の良さだけでなく、手際の良さも、AI選びの大切な基準になりそうですね。"
+        }
+      ]
+    },
+    {
+      "label": "SteamOS 3.9.6 Beta",
+      "points": [
+        "11月12日公開のBeta／Preview向け更新",
+        "VRR有無を問わずフレームタイミング改善",
+        "Remote Playでの画面表示問題など修正"
+      ],
+      "details": [
+        "11月12日公開のBeta／Preview向け更新",
+        "VRR有無を問わずフレームタイミング改善",
+        "Remote Playでの画面表示問題など修正"
+      ],
+      "url": "https://steamcommunity.com/app/1675200/announcements/?l=japanese",
+      "link": {
+        "url": "https://steamcommunity.com/app/1675200/announcements/?l=japanese",
+        "title": "SteamOS 3.9.6 Beta",
+        "site": "Valve / Steam",
+        "description": "Steam Deck公式のお知らせ",
+        "image": "assets/news/ep002/ep002_02_pc_steamos396beta.jpg"
+      },
+      "lines": [
+        {
+          "say": "続いてPCニュースです。",
+          "show": "続いてPCニュースです。"
+        },
+        {
+          "say": "Valveが11月12日、SteamOS 3.9.6のベータ版を公開しました。",
+          "show": "Valveが11月12日、SteamOS 3.9.6のベータ版を公開しました。"
+        },
+        {
+          "say": "ゲームのフレームレートを制限したときの表示タイミングを、VRRの有無にかかわらず改善しています。",
+          "show": "ゲームのフレームレートを制限したときの表示タイミングを、VRRの有無にかかわらず改善しています。"
+        },
+        {
+          "say": "さらに、NVIDIA製GPUを使ったSteam Remote Playで、画面が緑色になる問題なども修正されました。",
+          "show": "さらに、NVIDIA製GPUを使ったSteam Remote Playで、画面が緑色になる問題なども修正されました。"
+        },
+        {
+          "say": "まだテスト中のベータ版なので、試す際には更新チャンネルを確認したいところです。",
+          "show": "まだテスト中のベータ版なので、試す際には更新チャンネルを確認したいところです。"
+        }
+      ]
+    },
+    {
+      "label": "Xbox 25周年",
+      "points": [
+        "11月12日の25周年記念発表",
+        "初代Xbox作品25本がPCでも利用可能に",
+        "Wolfenstein 3制作中を発表"
+      ],
+      "details": [
+        "11月12日の25周年記念発表",
+        "初代Xbox作品25本がPCでも利用可能に",
+        "Wolfenstein 3制作中を発表"
+      ],
+      "url": "https://news.xbox.com/en-us/2026/11/12/xbox-25th-anniversary-news-recap/",
+      "link": {
+        "url": "https://news.xbox.com/en-us/2026/11/12/xbox-25th-anniversary-news-recap/",
+        "title": "Xbox 25th Anniversary Recap",
+        "site": "Xbox Wire",
+        "description": "Xbox公式の発表まとめ",
+        "image": "assets/news/ep002/ep002_03_game_xbox25.jpg"
+      },
+      "lines": [
+        {
+          "say": "続いてゲームニュースです。",
+          "show": "続いてゲームニュースです。"
+        },
+        {
+          "say": "Xboxは今年、誕生25周年を迎えます。",
+          "show": "Xboxは今年、誕生25周年を迎えます。"
+        },
+        {
+          "say": "11月12日の記念発表では、初代Xboxのゲーム25作品がPCで遊べるようになったことが紹介されました。",
+          "show": "11月12日の記念発表では、初代Xboxのゲーム25作品がPCで遊べるようになったことが紹介されました。"
+        },
+        {
+          "say": "一部の国では、これまでのプレイ履歴を振り返るXbox Playbackも始まっています。",
+          "show": "一部の国では、これまでのプレイ履歴を振り返るXbox Playbackも始まっています。"
+        },
+        {
+          "say": "さらに、シリーズ新作のWolfenstein 3が制作中であることも発表されました。",
+          "show": "さらに、シリーズ新作のWolfenstein 3が制作中であることも発表されました。"
+        },
+        {
+          "say": "25年分の思い出と、これからのゲーム。どちらにも目が離せませんね。",
+          "show": "25年分の思い出と、これからのゲーム。どちらにも目が離せませんね。"
+        }
+      ]
+    },
+    {
+      "label": "電装白熊座 サイバー演歌 紅白歌合戦",
+      "points": [
+        "募集ジャンルはサイバー演歌",
+        "参加申込は11月18日まで（ポスター記載）",
+        "12月28日・29日21時に公開予定"
+      ],
+      "details": [
+        "募集ジャンルはサイバー演歌",
+        "参加申込は11月18日まで（ポスター記載）",
+        "12月28日・29日21時に公開予定"
+      ],
+      "url": "https://x.com/RAx0ih0G1PtoqDu/status/2121249230350377380",
+      "link": {
+        "url": "https://x.com/RAx0ih0G1PtoqDu/status/2121249230350377380",
+        "title": "サイバー演歌紅白歌合戦 参加案内",
+        "site": "X / シロクマペンギン",
+        "description": "主催者の参加募集投稿",
+        "image": "assets/news/ep002/ep002_04_music_cyberenka.png"
+      },
+      "lines": [
+        {
+          "say": "そして今夜の個人企画です。",
+          "show": "そして今夜の個人企画です。"
+        },
+        {
+          "say": "シロクマペンギンさんが主催する、電装白熊座、サイバー演歌紅白歌合戦。",
+          "show": "シロクマペンギンさんが主催する、電装白熊座、サイバー演歌紅白歌合戦。"
+        },
+        {
+          "say": "募集ジャンルはサイバー演歌。白組と紅組に分かれ、年末の舞台で楽曲を披露する企画です。",
+          "show": "募集ジャンルはサイバー演歌。白組と紅組に分かれ、年末の舞台で楽曲を披露する企画です。"
+        },
+        {
+          "say": "参加受付は11月18日まで。楽曲と、16対9の静止画の提出は12月6日までと案内されています。",
+          "show": "参加受付は11月18日まで。楽曲と、16対9の静止画の提出は12月6日までと案内されています。"
+        },
+        {
+          "say": "YouTubeでのプレミア公開は12月28日と29日、両日とも夜9時開始予定です。",
+          "show": "YouTubeでのプレミア公開は12月28日と29日、両日とも夜9時開始予定です。"
+        },
+        {
+          "say": "詳しい参加方法は、主催者のXの告知をご確認ください。",
+          "show": "詳しい参加方法は、主催者のXの告知をご確認ください。"
+        },
+        {
+          "say": "演歌の情感とサイバーな音が出会う年の瀬。どんな歌が生まれるのか楽しみですね。",
+          "show": "演歌の情感とサイバーな音が出会う年の瀬。どんな歌が生まれるのか楽しみですね。"
+        }
+      ]
+    }
+  ],
+  "closing": [
+    {
+      "say": "ご紹介したニュースや企画のリンクは、Radioページからも確認できます。",
+      "show": "ご紹介したニュースや企画のリンクは、Radioページからも確認できます。"
+    },
+    {
+      "say": "今夜のひとときが、次の好奇心につながりますように。",
+      "show": "今夜のひとときが、次の好奇心につながりますように。"
+    },
+    {
+      "say": "39ra Garden Radio、ナイト・ガーデン・ブロードキャストでした。",
+      "show": "39ra Garden Radio、ナイト・ガーデン・ブロードキャストでした。"
+    },
+    {
+      "say": "それでは、また次の夜に。",
+      "show": "それでは、また次の夜に。"
+    }
+  ],
+  "highlight": 3,
+  "lines_timed": [
+    {
+      "start": 0.25,
+      "end": 1.602,
+      "show": "みなさん、こんばんは。",
+      "part": 0
+    },
+    {
+      "start": 2.525,
+      "end": 7,
+      "show": "39ra Garden Radio、ナイト・ガーデン・ブロードキャストへようこそ。",
+      "part": 0
+    },
+    {
+      "start": 7,
+      "end": 17.901,
+      "show": "今夜は、Googleの新しいAI、SteamOSの更新、Xboxの25周年、そしてAI音楽の年末企画をお届けします。",
+      "part": 0
+    },
+    {
+      "start": 18.756,
+      "end": 22.533,
+      "show": "それでは今夜も、少しの好奇心とともに始めましょう。",
+      "part": 0
+    },
+    {
+      "start": 22.753,
+      "end": 24.982,
+      "show": "最初はAIの話題です。",
+      "part": 1
+    },
+    {
+      "start": 26.42,
+      "end": 33.229,
+      "show": "Googleが11月12日、新しいAIモデル、Gemini 4 Hydrogenを発表しました。",
+      "part": 1
+    },
+    {
+      "start": 34.06,
+      "end": 42.026,
+      "show": "プログラミングや、複数の仕事を順に進めるAIエージェントで、速さと効率の両立を目指したモデルです。",
+      "part": 1
+    },
+    {
+      "start": 42.851,
+      "end": 48.679,
+      "show": "Google AI StudioやGeminiアプリ、Google検索などへの展開も案内されています。",
+      "part": 1
+    },
+    {
+      "start": 49.617,
+      "end": 55.525,
+      "show": "頭の良さだけでなく、手際の良さも、AI選びの大切な基準になりそうですね。",
+      "part": 1
+    },
+    {
+      "start": 55.745,
+      "end": 57.727,
+      "show": "続いてPCニュースです。",
+      "part": 2
+    },
+    {
+      "start": 59.004,
+      "end": 65.215,
+      "show": "Valveが11月12日、SteamOS 3.9.6のベータ版を公開しました。",
+      "part": 2
+    },
+    {
+      "start": 66.145,
+      "end": 72.791,
+      "show": "ゲームのフレームレートを制限したときの表示タイミングを、VRRの有無にかかわらず改善しています。",
+      "part": 2
+    },
+    {
+      "start": 73.643,
+      "end": 81.296,
+      "show": "さらに、NVIDIA製GPUを使ったSteam Remote Playで、画面が緑色になる問題なども修正されました。",
+      "part": 2
+    },
+    {
+      "start": 82.308,
+      "end": 87.734,
+      "show": "まだテスト中のベータ版なので、試す際には更新チャンネルを確認したいところです。",
+      "part": 2
+    },
+    {
+      "start": 87.954,
+      "end": 89.686,
+      "show": "続いてゲームニュースです。",
+      "part": 3
+    },
+    {
+      "start": 90.739,
+      "end": 94.468,
+      "show": "Xboxは今年、誕生25周年を迎えます。",
+      "part": 3
+    },
+    {
+      "start": 95.202,
+      "end": 103.609,
+      "show": "11月12日の記念発表では、初代Xboxのゲーム25作品がPCで遊べるようになったことが紹介されました。",
+      "part": 3
+    },
+    {
+      "start": 104.416,
+      "end": 110.169,
+      "show": "一部の国では、これまでのプレイ履歴を振り返るXbox Playbackも始まっています。",
+      "part": 3
+    },
+    {
+      "start": 110.949,
+      "end": 116.429,
+      "show": "さらに、シリーズ新作のWolfenstein 3が制作中であることも発表されました。",
+      "part": 3
+    },
+    {
+      "start": 117.437,
+      "end": 122.817,
+      "show": "25年分の思い出と、これからのゲーム。どちらにも目が離せませんね。",
+      "part": 3
+    },
+    {
+      "start": 123.037,
+      "end": 125.258,
+      "show": "そして今夜の個人企画です。",
+      "part": 4
+    },
+    {
+      "start": 126.103,
+      "end": 131.64,
+      "show": "シロクマペンギンさんが主催する、電装白熊座、サイバー演歌紅白歌合戦。",
+      "part": 4
+    },
+    {
+      "start": 132.281,
+      "end": 139.573,
+      "show": "募集ジャンルはサイバー演歌。白組と紅組に分かれ、年末の舞台で楽曲を披露する企画です。",
+      "part": 4
+    },
+    {
+      "start": 140.271,
+      "end": 149.758,
+      "show": "参加受付は11月18日まで。楽曲と、16対9の静止画の提出は12月6日までと案内されています。",
+      "part": 4
+    },
+    {
+      "start": 150.528,
+      "end": 158.61,
+      "show": "YouTubeでのプレミア公開は12月28日と29日、両日とも夜9時開始予定です。",
+      "part": 4
+    },
+    {
+      "start": 159.12,
+      "end": 163.103,
+      "show": "詳しい参加方法は、主催者のXの告知をご確認ください。",
+      "part": 4
+    },
+    {
+      "start": 163.895,
+      "end": 170.621,
+      "show": "演歌の情感とサイバーな音が出会う年の瀬。どんな歌が生まれるのか楽しみですね。",
+      "part": 4
+    },
+    {
+      "start": 171.091,
+      "end": 175.56,
+      "show": "ご紹介したニュースや企画のリンクは、Radioページからも確認できます。",
+      "part": 5
+    },
+    {
+      "start": 176.762,
+      "end": 180.297,
+      "show": "今夜のひとときが、次の好奇心につながりますように。",
+      "part": 5
+    },
+    {
+      "start": 181.477,
+      "end": 184.79,
+      "show": "39ra Garden Radio、ナイト・ガーデン・ブロードキャストでした。",
+      "part": 5
+    },
+    {
+      "start": 185.836,
+      "end": 187.783,
+      "show": "それでは、また次の夜に。",
+      "part": 5
+    }
+  ],
+  "segments": [
+    {
+      "kind": "opening",
+      "index": null,
+      "start": 0,
+      "end": 22.753
+    },
+    {
+      "kind": "news",
+      "index": 0,
+      "start": 22.753,
+      "end": 55.745
+    },
+    {
+      "kind": "news",
+      "index": 1,
+      "start": 55.745,
+      "end": 87.954
+    },
+    {
+      "kind": "news",
+      "index": 2,
+      "start": 87.954,
+      "end": 123.037
+    },
+    {
+      "kind": "news",
+      "index": 3,
+      "start": 123.037,
+      "end": 170.841
+    },
+    {
+      "kind": "closing",
+      "index": null,
+      "start": 170.841,
+      "end": 188.003
+    }
+  ]
+}
