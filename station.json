@@ -1,0 +1,27 @@
+{
+  "format": "myradio/station-1",
+  "name": "39ra Garden Radio",
+  "description": "AI、PC、ゲーム、創作文化の話題を、夜の庭からお届けする情報番組。",
+  "tagline": "NIGHT GARDEN BROADCAST",
+  "language": "ja",
+  "languages": [
+    "ja"
+  ],
+  "episodes": "episodes.json",
+  "character": {
+    "pack": "character/character.json",
+    "thumbnail": "character/base.png",
+    "note": "39ra Garden Radio 用オリジナルキャスター（既存素材を継続使用）"
+  },
+  "credits": [
+    "番組企画・編集：39ra Garden Radio",
+    "ナレーション音声：制作者提供",
+    "キャラクター表示：既存のRadioキャスター素材"
+  ],
+  "caster": "39ra Garden Radio / Night Garden Caster",
+  "audio": {
+    "dir": "audio",
+    "keep_days": 30
+  },
+  "weather": false
+}

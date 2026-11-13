@@ -1,0 +1,35 @@
+{
+  "format": "myradio/character-1",
+  "type": "sprites",
+  "size": [
+    1127,
+    1395
+  ],
+  "background": "#241b2e",
+  "base": "base.png",
+  "parts": {
+    "mouth_half": {
+      "src": "mouth_half.png",
+      "x": 512,
+      "y": 340
+    },
+    "mouth_open": {
+      "src": "mouth_open.png",
+      "x": 526,
+      "y": 332
+    },
+    "blink": {
+      "src": "blink.png",
+      "x": 350,
+      "y": 190
+    }
+  },
+  "mouth": {
+    "1": "mouth_half",
+    "2": "mouth_open"
+  },
+  "eye": {
+    "blink": "blink"
+  },
+  "note": "39ra Garden Radio task-002 R1. Full-body-only sprite test; base 1127x1395. Derived mouth patches: 106x51 at 512,340 and 80x72 at 526,332. Derived blink patch: 350x150 at 350,190. No depth texture or half-body assets."
+}
