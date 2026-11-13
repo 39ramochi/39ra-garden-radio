@@ -42,7 +42,8 @@
         "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
         "title": "Claude Fable 5.2とMythos 5.2",
         "site": "Anthropic",
-        "description": "新モデルの公式発表"
+        "description": "新モデルの公式発表",
+        "image": "assets/news/ep001/ep001_01_ai-anthropic.jpg"
       },
       "lines": [
         {
@@ -88,7 +89,8 @@
         "url": "https://www.nvidia.com/en-us/geforce/news/war-thunder-dlss-5-3d-guided-neural-rendering-out-now/",
         "title": "War ThunderにDLSS 5を導入",
         "site": "NVIDIA",
-        "description": "NVIDIAによるゲーム映像技術の発表"
+        "description": "NVIDIAによるゲーム映像技術の発表",
+        "image": "assets/news/ep001/ep001_02_pc-nvidia.jpg"
       },
       "lines": [
         {
@@ -134,7 +136,8 @@
         "url": "https://blog.ja.playstation.com/2026/11/11/20261111-psplus-game-catalog-o/",
         "title": "PlayStation Plus 11月のゲームカタログ",
         "site": "PlayStation Blog",
-        "description": "11月の追加予定タイトルを紹介"
+        "description": "11月の追加予定タイトルを紹介",
+        "image": "assets/news/ep001/ep001_03_game-psplus.webp"
       },
       "lines": [
         {
@@ -180,7 +183,8 @@
         "url": "https://note.com/yazawa_ya/n/n4339fc0920bf",
         "title": "一語一曲｜参加企画",
         "site": "note / ヤザワ屋",
-        "description": "短い言葉から楽曲を制作する個人企画"
+        "description": "短い言葉から楽曲を制作する個人企画",
+        "image": "assets/news/ep001/ep001_04_music-oneword.webp"
       },
       "lines": [
         {
