@@ -208,6 +208,7 @@ main{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:16px;bac
 .has-card #card{opacity:1;pointer-events:auto;transform:none}
 #card:hover{border-color:var(--yellow)}
 #card img{width:620px;height:324px;object-fit:cover;border-radius:8px;background:#0f1219;flex:none}
+#card.portrait-news img{object-position:center top}
 #card.noimg img{display:none}
 #card.icon img{object-fit:contain;padding:64px;background:#0f1219 radial-gradient(circle,rgba(255,208,40,.08),transparent 70%)}
 #card .txt{display:flex;flex-direction:column;gap:10px;min-width:0;flex:1}
@@ -891,6 +892,7 @@ $("stage").addEventListener("click", e => {
 function showCard(link) {
   const card = $("card"), stage = $("stage");
   stage.classList.toggle("has-card", !!link);
+  card.classList.toggle("portrait-news", /ep004_03_music_christmas-festival2026/i.test(link?.image || ""));
   if (!link) return;
   const host = (() => { try { return new URL(link.url).hostname; } catch { return ""; } })();
   const missing = link.status === 404 || link.status === 410;
