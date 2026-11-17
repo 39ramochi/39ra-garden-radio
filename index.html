@@ -958,8 +958,18 @@ $("cover").querySelector(".play").onclick = toggle; $("pp").onclick = toggle;
 audio.addEventListener("play", () => { const cover = $("cover"); cover.classList.add("depart"); setTimeout(() => { cover.hidden = true; cover.classList.remove("depart"); }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 650); $("resume").hidden = true; $("frame").classList.add("playing"); $("ppIcon").innerHTML = PAUSE; });
 audio.addEventListener("pause", () => { $("frame").classList.remove("playing"); $("ppIcon").innerHTML = PLAY; });
 audio.addEventListener("ended", () => { $("cover").hidden = false; });
-// audio is kept for a while only (the script stays): tell the viewer instead of failing silently
-audio.addEventListener("error", () => { if (ep) $("loading").textContent = tr("expired"); });
+// A transient media error can occur while a mobile browser reopens the MP3.
+function clearAudioStatus() {
+  if (ep && Number.isFinite(audio.duration) && audio.duration > 0 && $("loading").textContent === tr("expired")) {
+    $("loading").textContent = "";
+  }
+}
+audio.addEventListener("error", () => {
+  if (!ep) return;
+  $("loading").textContent = tr("expired");
+  setTimeout(clearAudioStatus, 1200);
+});
+["loadedmetadata", "loadeddata", "canplay", "playing"].forEach(ev => audio.addEventListener(ev, clearAudioStatus));
 $("seek").addEventListener("input", () => { seeking = true; audio.currentTime = $("seek").value / 1000 * ep.seconds; });
 $("seek").addEventListener("change", () => { seeking = false; });
 // playback speed (kept in this browser); the browser keeps the voice's pitch
@@ -1082,6 +1092,7 @@ async function load(date, lang = LANG, at = 0) {
   curName = name;
   const audioVersion = ep.date === "2026-11-17" ? `${ep.made_at || ""}-final` : (ep.made_at || "");
   audio.src = (ep.audio || `audio/${name}.mp3`) + `?v=${encodeURIComponent(audioVersion)}`;
+  audio.load();
   $("sdate").querySelector("span").textContent = dateFmt(date);
   $("langsw").hidden = langs.length < 2;
   $("langsw").innerHTML = langs.map(l => `<button data-lang="${l}" aria-pressed="${l === L}" title="${NAMES[l] || l}">${l.toUpperCase()}</button>`).join("");
