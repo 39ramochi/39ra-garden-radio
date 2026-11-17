@@ -846,8 +846,11 @@ const newsSeg = j => ep.segments.findIndex(s => s.kind === "news" && s.index ===
 // while it plays it plays on from there; while it is stopped it only moves there, so the show reads like an article too
 function jumpTo(i) {
   const s = ep?.segments[i]; if (!s) return;
-  const go = () => { audio.currentTime = s.start; audio.play().catch(() => {}); };
-  if (audio.readyState >= 1) go(); else audio.addEventListener("loadedmetadata", go, { once: true });
+  // Start playback synchronously inside the click gesture. On mobile, waiting
+  // for loadedmetadata first can lose the user-activation window and reject play().
+  const seek = () => { audio.currentTime = s.start; };
+  if (audio.readyState >= 1) seek(); else audio.addEventListener("loadedmetadata", seek, { once: true });
+  audio.play().catch(() => {});
   $("cover").hidden = true;
 }
 document.addEventListener("click", e => {
