@@ -844,13 +844,25 @@ function showPart(i) {
 // jump to a part of the show (a topic)
 const newsSeg = j => ep.segments.findIndex(s => s.kind === "news" && s.index === j);
 // while it plays it plays on from there; while it is stopped it only moves there, so the show reads like an article too
+let jumpSerial = 0;
 function jumpTo(i) {
   const s = ep?.segments[i]; if (!s) return;
-  // Start playback synchronously inside the click gesture. On mobile, waiting
-  // for loadedmetadata first can lose the user-activation window and reject play().
-  const seek = () => { audio.currentTime = s.start; };
-  if (audio.readyState >= 1) seek(); else audio.addEventListener("loadedmetadata", seek, { once: true });
-  audio.play().catch(() => {});
+  const serial = ++jumpSerial;
+  const seek = () => {
+    if (serial !== jumpSerial || audio.readyState < 1) return;
+    try { audio.currentTime = s.start; } catch {}
+  };
+  // Apply the target as soon as metadata exists, and again after play starts.
+  // Some mobile browsers reinitialize currentTime when the source begins.
+  audio.addEventListener("loadedmetadata", seek, { once: true });
+  audio.addEventListener("durationchange", seek, { once: true });
+  audio.addEventListener("playing", seek, { once: true });
+  seek();
+  audio.play().then(() => {
+    seek();
+    setTimeout(seek, 120);
+    setTimeout(seek, 500);
+  }).catch(() => {});
   $("cover").hidden = true;
 }
 document.addEventListener("click", e => {
