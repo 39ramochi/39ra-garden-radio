@@ -846,7 +846,7 @@ const newsSeg = j => ep.segments.findIndex(s => s.kind === "news" && s.index ===
 // while it plays it plays on from there; while it is stopped it only moves there, so the show reads like an article too
 function jumpTo(i) {
   const s = ep?.segments[i]; if (!s) return;
-  const go = () => { audio.currentTime = s.start; };
+  const go = () => { audio.currentTime = s.start; audio.play().catch(() => {}); };
   if (audio.readyState >= 1) go(); else audio.addEventListener("loadedmetadata", go, { once: true });
   $("cover").hidden = true;
 }
