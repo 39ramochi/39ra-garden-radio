@@ -1065,7 +1065,8 @@ async function load(date, lang = LANG, at = 0) {
   curPart = -1;
   // an episode can be remade under the same name: the made_at stamp keeps the browser from playing a cached older voice
   curName = name;
-  audio.src = (ep.audio || `audio/${name}.mp3`) + `?v=${encodeURIComponent(ep.made_at || "")}`;
+  const audioVersion = ep.date === "2026-11-17" ? `${ep.made_at || ""}-final` : (ep.made_at || "");
+  audio.src = (ep.audio || `audio/${name}.mp3`) + `?v=${encodeURIComponent(audioVersion)}`;
   $("sdate").querySelector("span").textContent = dateFmt(date);
   $("langsw").hidden = langs.length < 2;
   $("langsw").innerHTML = langs.map(l => `<button data-lang="${l}" aria-pressed="${l === L}" title="${NAMES[l] || l}">${l.toUpperCase()}</button>`).join("");
