@@ -843,26 +843,32 @@ function showPart(i) {
 }
 // jump to a part of the show (a topic)
 const newsSeg = j => ep.segments.findIndex(s => s.kind === "news" && s.index === j);
-// while it plays it plays on from there; while it is stopped it only moves there, so the show reads like an article too
-let jumpSerial = 0;
+// Seek exactly once. A new explicit seek supersedes any pending metadata seek.
+let pendingSeek = null;
+function cancelPendingSeek() {
+  if (pendingSeek) audio.removeEventListener("loadedmetadata", pendingSeek);
+  pendingSeek = null;
+}
+function seekOnce(time) {
+  cancelPendingSeek();
+  const episode = ep;
+  const src = audio.src;
+  const apply = () => {
+    if (pendingSeek === apply) pendingSeek = null;
+    if (ep !== episode || audio.src !== src) return;
+    audio.currentTime = time;
+  };
+  if (audio.readyState >= 1) apply();
+  else {
+    pendingSeek = apply;
+    audio.addEventListener("loadedmetadata", apply, { once: true });
+  }
+}
 function jumpTo(i) {
   const s = ep?.segments[i]; if (!s) return;
-  const serial = ++jumpSerial;
-  const seek = () => {
-    if (serial !== jumpSerial || audio.readyState < 1) return;
-    try { audio.currentTime = s.start; } catch {}
-  };
-  // Apply the target as soon as metadata exists, and again after play starts.
-  // Some mobile browsers reinitialize currentTime when the source begins.
-  audio.addEventListener("loadedmetadata", seek, { once: true });
-  audio.addEventListener("durationchange", seek, { once: true });
-  audio.addEventListener("playing", seek, { once: true });
-  seek();
-  audio.play().then(() => {
-    seek();
-    setTimeout(seek, 120);
-    setTimeout(seek, 500);
-  }).catch(() => {});
+  seekOnce(s.start);
+  // Start play within the click gesture, but never seek again after playback begins.
+  if (audio.paused) audio.play().catch(() => {});
   $("cover").hidden = true;
 }
 document.addEventListener("click", e => {
@@ -971,7 +977,7 @@ audio.addEventListener("error", () => {
   setTimeout(clearAudioStatus, 1200);
 });
 ["loadedmetadata", "loadeddata", "canplay", "playing"].forEach(ev => audio.addEventListener(ev, clearAudioStatus));
-$("seek").addEventListener("input", () => { seeking = true; audio.currentTime = $("seek").value / 1000 * ep.seconds; });
+$("seek").addEventListener("input", () => { seeking = true; seekOnce($("seek").value / 1000 * ep.seconds); });
 $("seek").addEventListener("change", () => { seeking = false; });
 // playback speed (kept in this browser); the browser keeps the voice's pitch
 const RATES = [1, 1.25, 1.5, 0.75];
@@ -996,7 +1002,7 @@ function savePos(force) {
 audio.addEventListener("timeupdate", () => { if (!audio.paused) savePos(); });
 audio.addEventListener("pause", () => { savePos(true); listEpisodes(); });
 audio.addEventListener("ended", () => { savePos(true); listEpisodes(); });
-$("from0").onclick = () => { audio.currentTime = 0; $("resume").hidden = true; audio.play(); };
+$("from0").onclick = () => { seekOnce(0); $("resume").hidden = true; audio.play(); };
 // the lock screen, a headset's buttons, a car: previous / next go by topic
 function stepPart(d) {
   if (!ep) return;
@@ -1008,9 +1014,9 @@ function stepPart(d) {
 if ("mediaSession" in navigator) {
   const ms = navigator.mediaSession, on = (a, f) => { try { ms.setActionHandler(a, f); } catch {} };
   on("previoustrack", () => stepPart(-1)); on("nexttrack", () => stepPart(1));
-  on("seekbackward", e => { audio.currentTime = Math.max(0, audio.currentTime - (e.seekOffset || 10)); });
-  on("seekforward", e => { audio.currentTime = Math.min(audio.duration || 1e9, audio.currentTime + (e.seekOffset || 10)); });
-  on("seekto", e => { audio.currentTime = e.seekTime; });
+  on("seekbackward", e => { seekOnce(Math.max(0, audio.currentTime - (e.seekOffset || 10))); });
+  on("seekforward", e => { seekOnce(Math.min(audio.duration || 1e9, audio.currentTime + (e.seekOffset || 10))); });
+  on("seekto", e => { seekOnce(e.seekTime); });
   const pos = () => { try { if (audio.duration) ms.setPositionState({ duration: audio.duration, position: Math.min(audio.currentTime, audio.duration), playbackRate: audio.playbackRate }); } catch {} };
   ["loadedmetadata", "seeked", "ratechange", "play", "pause"].forEach(ev => audio.addEventListener(ev, pos));
 }
@@ -1080,6 +1086,7 @@ async function load(date, lang = LANG, at = 0) {
   const L = langs.length ? (langs.includes(lang) ? lang : langs[0]) : null;
   const name = L ? `${date}-${L}` : date;
   savePos(true);   // the episode being left: where it stopped
+  cancelPendingSeek();
   ep = await (await fetch(`episodes/${name}.json`, { cache: "no-store" })).json();
   setLang(L || ep.lang || STATION.language || LANG);
   // speech intervals; short pauses inside a part count as speaking, so her mouth does not flicker shut
@@ -1092,6 +1099,7 @@ async function load(date, lang = LANG, at = 0) {
   // an episode can be remade under the same name: the made_at stamp keeps the browser from playing a cached older voice
   curName = name;
   const audioVersion = ep.date === "2026-11-17" ? `${ep.made_at || ""}-final` : (ep.made_at || "");
+  cancelPendingSeek();
   audio.src = (ep.audio || `audio/${name}.mp3`) + `?v=${encodeURIComponent(audioVersion)}`;
   audio.load();
   $("sdate").querySelector("span").textContent = dateFmt(date);
@@ -1119,8 +1127,7 @@ async function load(date, lang = LANG, at = 0) {
   document.querySelectorAll("#eps a").forEach(a => a.classList.toggle("cur", a.dataset.date === date));
   $("loading").textContent = "";
   // switching the language keeps the place in the show: the same part, from its start
-  if (at > 0 && ep.segments[at]) { const go = () => { audio.currentTime = ep.segments[at].start; };
-    if (audio.readyState >= 1) go(); else audio.addEventListener("loadedmetadata", go, { once: true }); $("cover").hidden = true; }
+  if (at > 0 && ep.segments[at]) { seekOnce(ep.segments[at].start); $("cover").hidden = true; }
   else {
     $("cover").hidden = false;
     // stopped partway last time: the play button goes on from there
@@ -1128,8 +1135,7 @@ async function load(date, lang = LANG, at = 0) {
     $("resume").hidden = !(back > 3 && back < ep.seconds - 3);
     if (!$("resume").hidden) {
       $("resume").querySelector("span").textContent = tr("resumeAt")(mmss(back)); $("from0").textContent = tr("from0");
-      const go = () => { audio.currentTime = back; };
-      if (audio.readyState >= 1) go(); else audio.addEventListener("loadedmetadata", go, { once: true });
+      seekOnce(back);
     }
   }
   if (at > 0) $("resume").hidden = true;
