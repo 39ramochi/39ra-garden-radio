@@ -936,6 +936,7 @@ function tick(now) {
   const speakingAt = t => !audio.paused && speech.some(([a, b]) => t >= a && t < b);
   if (CHAR.type === "sprites") spriteFrame(audio.currentTime, now, ep && speakingAt(audio.currentTime), ep?.segments[curPart]?.kind);
   if (ep) {
+    clearAudioStatus();
     const t = audio.currentTime, dur = ep.seconds;
     const part = Math.max(0, ep.segments.findIndex(s => t >= s.start && t < s.end));
     showPart(t >= dur - 0.05 ? ep.segments.length - 1 : part);
