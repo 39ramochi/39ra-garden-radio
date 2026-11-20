@@ -237,6 +237,8 @@ main{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:16px;bac
 #cap span{font-size:46px;font-weight:800;line-height:1.3;padding:8px 26px;border-radius:10px;background:rgba(0,0,0,.5);
   text-shadow:0 2px 0 #000;max-width:1800px;transition:opacity .15s}
 #cap span:empty{opacity:0}
+/* EP008 2026-11-20 only: no subtitles, with full audio-reactive mouth. */
+html.ep008-no-subtitles :is(#cap,#now){display:none !important}
 #bar{left:0;right:0;bottom:0;height:8px;background:rgba(255,255,255,.08)}
 #bar b{display:block;height:100%;width:0;background:var(--yellow)}
 #bar i{position:absolute;top:0;width:3px;height:100%;background:rgba(0,0,0,.6)}
@@ -731,11 +733,12 @@ function compose(layers) {
 }
 function spriteFrame(t, now, speaking, kind) {
   if (!SP.ready) return;
+  const noCaptionsEP008 = ep?.date === "2026-11-20" && ep?.lines_timed?.length === 0;
   // mouth: measured from the voice as it plays; else the episode's precomputed levels; else a simple flap
   let want = 0;
   if (speaking) {
     const lv = ep?.mouth, live = voiceLevel();
-    want = live !== null ? live : lv ? +(lv.levels[Math.floor(t * lv.fps)] || 0) : (Math.floor(now / 160) % 3 === 0 ? 1 : 2);
+    want = noCaptionsEP008 ? (live ?? 0) : live !== null ? live : lv ? +(lv.levels[Math.floor(t * lv.fps)] || 0) : (Math.floor(now / 160) % 3 === 0 ? 1 : 2);
   }
   // change shape only after holding the current one a while, and one step at a time (closed <-> half <-> open)
   if (want !== SP.mouth && now - SP.mouthAt >= MOUTH_HOLD) { SP.mouth += Math.sign(want - SP.mouth); SP.mouthAt = now; }
@@ -762,7 +765,7 @@ function spriteFrame(t, now, speaking, kind) {
   const ex = kind === "closing" ? CHAR.expressions?.smile : null;
   const exEye = Array.isArray(ex) ? ex[0] : ex?.eye, exMouth = Array.isArray(ex) ? ex[1] : ex?.mouth;
   const eye = exEye || blinkEye || (gaze?.[0] < -.4 ? CHAR.eye?.left : gaze?.[0] > .4 ? CHAR.eye?.right : null);
-  const mouth = m ? CHAR.mouth?.[m] : exMouth;
+  const mouth = m ? CHAR.mouth?.[m] : (noCaptionsEP008 ? null : exMouth);
   compose([eye, mouth].filter(Boolean));
   if (SP.gl) {
     const gl = SP.gl;
@@ -939,8 +942,11 @@ $("card").addEventListener("click", () => audio.pause());
 
 // ---------- the clock: everything follows the audio position ----------
 function tick(now) {
-  const speakingAt = t => !audio.paused && speech.some(([a, b]) => t >= a && t < b);
-  if (CHAR.type === "sprites") spriteFrame(audio.currentTime, now, ep && speakingAt(audio.currentTime), ep?.segments[curPart]?.kind);
+  const noCaptionsEP008 = ep?.date === "2026-11-20" && ep?.lines_timed?.length === 0;
+  const audioActive = !audio.paused && !audio.ended;
+  const speakingAt = t => audioActive && speech.some(([a, b]) => t >= a && t < b);
+  // For EP008 alone, allow waveform analysis without the subtitle speech windows.
+  if (CHAR.type === "sprites") spriteFrame(audio.currentTime, now, ep && (noCaptionsEP008 ? audioActive : speakingAt(audio.currentTime)), ep?.segments[curPart]?.kind);
   if (ep) {
     clearAudioStatus();
     const t = audio.currentTime, dur = ep.seconds;
@@ -949,7 +955,7 @@ function tick(now) {
     const line = ep.lines_timed.find(l => t >= l.start && t < l.end + 0.3);
     const cap = line ? line.show : "";
     if ($("cap").firstChild.textContent !== cap) { $("cap").firstChild.textContent = cap; $("now").textContent = cap; }
-    if (CHAR.type !== "sprites") setTalking(speakingAt(t));
+    if (CHAR.type !== "sprites") setTalking(noCaptionsEP008 ? audioActive && (voiceLevel() ?? 0) > 0 : speakingAt(t));
     $("bar").firstChild.style.width = (t / dur * 100) + "%";
     if (!seeking) $("seek").value = Math.round(t / dur * 1000);
     $("time").textContent = `${mmss(t)} / ${mmss(dur)}`;
@@ -1088,6 +1094,7 @@ async function load(date, lang = LANG, at = 0) {
   savePos(true);   // the episode being left: where it stopped
   cancelPendingSeek();
   ep = await (await fetch(`episodes/${name}.json`, { cache: "no-store" })).json();
+  document.documentElement.classList.toggle("ep008-no-subtitles", ep.date === "2026-11-20" && ep.lines_timed?.length === 0);
   setLang(L || ep.lang || STATION.language || LANG);
   // speech intervals; short pauses inside a part count as speaking, so her mouth does not flicker shut
   speech = [];
